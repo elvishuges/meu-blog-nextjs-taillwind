@@ -1,18 +1,12 @@
+"use-client";
 import clsx from "clsx";
+import { SpinLoader } from "../SpinLoader";
 
 export function Header() {
   console.log("Header");
   return (
-    <h1
-      className={clsx(
-        "text-6xl",
-        "font-bold",
-        "text-blue-500",
-        "hover:text-blue-50",
-        "hover:bg-blue-500"
-      )}
-    >
-      Texto no meu H1
-    </h1>
+    <div>
+      <SpinLoader className="min-h-[100px] bg-amber-500" />
+    </div>
   );
 }

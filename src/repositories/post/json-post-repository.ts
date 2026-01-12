@@ -3,6 +3,7 @@ import { PostRepository } from "./post-repository";
 import { readFile, writeFile } from "fs/promises";
 
 import { resolve } from "path";
+import { timeLog } from "console";
 const ROOT_DIR = process.cwd(); // current work dir
 const JSON_POST_FILE_PATH = resolve(
   ROOT_DIR,
@@ -11,6 +12,7 @@ const JSON_POST_FILE_PATH = resolve(
   "seed",
   "posts.json"
 );
+const SIMULATE_WAIT_IN_MS = 5000;
 
 export class JsonPostRespository implements PostRepository {
   private async readFromDisk(): Promise<PostModel[]> {
@@ -19,11 +21,17 @@ export class JsonPostRespository implements PostRepository {
     const { posts } = parsedJson;
     return posts;
   }
+  private async simulateWait() {
+    if (SIMULATE_WAIT_IN_MS <= 0) return;
+    await new Promise((resolve) => setTimeout(resolve, SIMULATE_WAIT_IN_MS));
+  }
   async findAll(): Promise<PostModel[]> {
+    await this.simulateWait();
     const posts = await this.readFromDisk();
     return posts;
   }
   async findById(id: string): Promise<PostModel | null> {
+    await this.simulateWait();
     const posts = await this.readFromDisk();
     const post = posts.find((post) => post.id == id);
     if (!post) throw new Error("Post não encontrado");
@@ -33,9 +41,3 @@ export class JsonPostRespository implements PostRepository {
 console.log(ROOT_DIR);
 
 export const postRepository: PostRepository = new JsonPostRespository();
-(async () => {
-  const post = await postRepository.findById(
-    "99f8add4-7684-4c16-a316-616271db199e"
-  );
-  console.log(post);
-})();
