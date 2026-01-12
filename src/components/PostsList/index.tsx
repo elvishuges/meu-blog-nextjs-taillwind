@@ -3,7 +3,7 @@ import { SpinLoader } from "@/components/SpinLoader";
 import { postRepository } from "@/repositories/post";
 import clsx from "clsx";
 
-export default async function PostList() {
+export default async function PostsList() {
   const posts = await postRepository.findAll();
   return (
     <div>

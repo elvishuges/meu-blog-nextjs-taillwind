@@ -1,19 +1,22 @@
-import { Header } from "@/components/Header";
-import PostList from "@/components/PostList";
+import { Container } from "@/components/Container";
+import PostsList from "@/components/PostsList";
 import { SpinLoader } from "@/components/SpinLoader";
-import { postRepository } from "@/repositories/post";
-import clsx from "clsx";
 import { Suspense } from "react";
 
 export default async function HomePage() {
-  const posts = await postRepository.findAll();
   return (
-    <div>
-      <header className=" text-6xl text-center py-2">Aqui é o header</header>
+    <Container>
+      <header>
+        <h1 className="text-6xl font-bold text-center py-8">Aqui é a HEADER</h1>
+      </header>
+
       <Suspense fallback={<SpinLoader />}>
-        <PostList></PostList>
+        <PostsList />
       </Suspense>
-      <footer className="text-center py-2">Footer</footer>
-    </div>
+
+      <footer>
+        <p className="text-6xl font-bold text-center py-8">Footer</p>
+      </footer>
+    </Container>
   );
 }
