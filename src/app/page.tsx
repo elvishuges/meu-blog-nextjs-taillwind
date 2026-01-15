@@ -1,9 +1,7 @@
 import { Container } from "@/components/Container";
 import { Header } from "@/components/Header";
-import { PostCoverImage } from "@/components/PostCoverImage";
-import PostFeatured from "@/components/PostFeutered";
-import { PostHeading } from "@/components/PostHeading";
-import PostsList from "@/components/PostsList";
+import { PostFeutered } from "@/components/PostFeutered";
+import { PostsList } from "@/components/PostsList";
 import { SpinLoader } from "@/components/SpinLoader";
 import { Suspense } from "react";
 
@@ -12,7 +10,7 @@ export default async function HomePage() {
     <Container>
       <Header />
       <Suspense fallback={<SpinLoader />}>
-        <PostFeatured />
+        <PostFeutered />
       </Suspense>
       <Suspense fallback={<SpinLoader />}>
         <PostsList />
