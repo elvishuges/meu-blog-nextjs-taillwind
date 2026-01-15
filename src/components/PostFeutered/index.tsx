@@ -1,11 +1,13 @@
+import { postRepository } from "@/repositories/post";
 import { PostCoverImage } from "../PostCoverImage";
 import { PostHeading } from "../PostHeading";
 import { PostSummary } from "../PostSummary";
+import { findAllPublicPosts } from "@/lib/post/queries";
 
-export function PostFeutered() {
-  const slug = "qualquer";
-  const postLink = `/post/${slug}`;
-
+export async function PostFeutered() {
+  const posts = await findAllPublicPosts();
+  const firstPost = posts[0];
+  const postLink = firstPost.slug;
   return (
     <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group">
       <PostCoverImage
@@ -22,13 +24,11 @@ export function PostFeutered() {
       />
 
       <PostSummary
-        postLink={postLink}
+        postLink={firstPost.coverImageUrl}
         postHeading="h1"
-        createdAt={"2025-04-08T00:24:38.616Z"}
-        excerpt={
-          "O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO."
-        }
-        title={"Rotina matinal de pessoas altamente eficazes"}
+        createdAt={firstPost.createdAt}
+        excerpt={firstPost.excerpt}
+        title={firstPost.title}
       />
     </section>
   );

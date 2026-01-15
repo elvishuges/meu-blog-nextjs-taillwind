@@ -25,11 +25,14 @@ export class JsonPostRespository implements PostRepository {
     if (SIMULATE_WAIT_IN_MS <= 0) return;
     await new Promise((resolve) => setTimeout(resolve, SIMULATE_WAIT_IN_MS));
   }
-  async findAll(): Promise<PostModel[]> {
+  async findAllPublic(): Promise<PostModel[]> {
     await this.simulateWait();
+    console.log("111111");
+
     const posts = await this.readFromDisk();
-    return posts;
+    return posts.filter((p) => p.published);
   }
+
   async findById(id: string): Promise<PostModel | null> {
     await this.simulateWait();
     const posts = await this.readFromDisk();
