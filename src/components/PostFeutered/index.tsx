@@ -2,17 +2,17 @@ import { postRepository } from "@/repositories/post";
 import { PostCoverImage } from "../PostCoverImage";
 import { PostHeading } from "../PostHeading";
 import { PostSummary } from "../PostSummary";
-import { findAllPublicPosts } from "@/lib/post/queries";
+import { findAllPublicPostsCached } from "@/lib/post/queries";
 
 export async function PostFeutered() {
-  const posts = await findAllPublicPosts();
+  const posts = await findAllPublicPostsCached();
   const firstPost = posts[0];
   const postLink = firstPost.slug;
   return (
     <section className="grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group">
       <PostCoverImage
         linkProps={{
-          href: postLink,
+          href: `post/${postLink}`,
         }}
         imageProps={{
           width: 1200,
