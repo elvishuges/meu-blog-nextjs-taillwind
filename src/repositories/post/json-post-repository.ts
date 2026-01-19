@@ -44,6 +44,5 @@ export class JsonPostRespository implements PostRepository {
     return post;
   }
 }
-console.log(ROOT_DIR);
 
 export const postRepository: PostRepository = new JsonPostRespository();
