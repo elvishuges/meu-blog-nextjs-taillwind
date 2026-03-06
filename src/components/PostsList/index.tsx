@@ -25,7 +25,6 @@ export async function PostsList() {
                 alt: post.title,
               }}
             />
-
             <PostSummary
               postLink={postLink}
               postHeading="h2"
